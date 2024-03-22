@@ -144,13 +144,13 @@ export default function AppFunctional(props) {
       );
       await setForm({
         ...form,
-        initialMessage: response.data.message,
+        initialMessage: response?.data?.message,
         initialEmail: "",
       });
     } catch (error) {
       await setForm({
         ...initialValues,
-        initialMessage: error.response.data.message,
+        initialMessage: error?.response?.data?.message,
       });
     }
   }
@@ -172,26 +172,40 @@ export default function AppFunctional(props) {
         ))}
       </div>
       <div className="info">
-        <h3 id="message">{form.initialMessage}</h3>
+        <h3 id="message" data-testid="message">
+          {form.initialMessage}
+        </h3>
       </div>
       <div id="keypad">
-        <button id="left" onClick={() => sonrakiIndex("SOL")}>
+        <button
+          data-testid="left"
+          id="left"
+          onClick={() => sonrakiIndex("SOL")}
+        >
           SOL
         </button>
-        <button id="up" onClick={() => sonrakiIndex("YUKARI")}>
+        <button data-testid="up" id="up" onClick={() => sonrakiIndex("YUKARI")}>
           YUKARI
         </button>
-        <button id="right" onClick={() => sonrakiIndex("SAĞ")}>
+        <button
+          data-testid="right"
+          id="right"
+          onClick={() => sonrakiIndex("SAĞ")}
+        >
           SAĞ
         </button>
-        <button id="down" onClick={() => sonrakiIndex("ASAGI")}>
+        <button
+          data-testid="down"
+          id="down"
+          onClick={() => sonrakiIndex("ASAGI")}
+        >
           AŞAĞI
         </button>
-        <button id="reset" onClick={reset}>
+        <button data-testid="reset" id="reset" onClick={reset}>
           reset
         </button>
       </div>
-      <form type="submit" onSubmit={onSubmit}>
+      <form type="submit" onSubmit={onSubmit} data-testid="emailForm">
         <input
           id="email"
           type="email"
@@ -199,6 +213,7 @@ export default function AppFunctional(props) {
           name="email"
           value={form.initialEmail}
           onChange={onChange}
+          data-testid="email"
         />
         <input id="submit" type="submit"></input>
       </form>
